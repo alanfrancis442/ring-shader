@@ -1,6 +1,5 @@
 import { useRef, useMemo, useEffect } from 'react';
 import { useFrame } from '@react-three/fiber';
-import {  useGLTF } from '@react-three/drei';
 import { TriangleModel } from './Triangle';
 import * as THREE from 'three';
 
@@ -301,23 +300,6 @@ const commonVertexShader = `
   }
 `;
 
-// Helper component to load GLB model
-function GLBModel({ path, scale = 1, position = [0, 0, 0], rotation = [0, 0, 0] }: { 
-  path: string; 
-  scale?: number; 
-  position?: [number, number, number]; 
-  rotation?: [number, number, number];
-}) {
-  const { scene } = useGLTF(path);
-  console.log('Loaded model from', scene);
-  const clonedScene = useMemo(() => scene.clone(true), [scene]);
-  
-  return (
-    <group scale={scale} position={position} rotation={rotation}>
-      <primitive object={clonedScene} />
-    </group>
-  );
-}
 
 const fragmentShader = `
   uniform vec3 uColor1;
